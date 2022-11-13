@@ -6,11 +6,7 @@ exports.connect = () => {
     // Connecting to the database
     mongoose
         .connect(MONGO_URI, {
-
             useNewUrlParser: true,
-            useUnfiedToplogy: true,
-            useCreateIndex: true,
-            useFindAndModyfy: false,
         })
         .then(() => {
             console.log("Successfully connected to database");
