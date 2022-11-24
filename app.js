@@ -1,6 +1,7 @@
 require("dotenv").config();
 require("./config/database").connect();
 const bcrypt = require('bcrypt');
+const cors = require('cors')
 const jwt = require('jsonwebtoken')
 
 const express = require("express");
@@ -8,6 +9,7 @@ const express = require("express");
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 
 // Logic goes here
 
@@ -96,6 +98,8 @@ app.post("/login", async (req, res) => {
         user.token = token;
   
         // user
+        res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
+        res.header('Access-Control-Allow-Headers', "*");
         res.status(200).json(user);
       }
       res.status(400).send("Invalid Credentials");
