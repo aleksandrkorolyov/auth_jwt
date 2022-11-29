@@ -25,8 +25,13 @@ app.post("/register", async (req, res) => {
 
         const { first_name, last_name, email, password } = req.body;
 
+        res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
+        res.header('Access-Control-Allow-Headers', "*");
+
         // Validate user input
         if (!(email && password && first_name && last_name)) {
+        res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
+        res.header('Access-Control-Allow-Headers', "*");
           res.status(400).send("All input is required");
         }
     
@@ -35,7 +40,10 @@ app.post("/register", async (req, res) => {
         const oldUser = await User.findOne({ email });
     
         if (oldUser) {
-          return res.status(409).send("User Already Exist. Please Login");
+          return 
+        res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
+        res.header('Access-Control-Allow-Headers', "*");
+	res.status(409).send("User Already Exist. Please Login");
         }
     
         //Encrypt user password
@@ -61,6 +69,9 @@ app.post("/register", async (req, res) => {
         user.token = token;
 
         // return new user
+
+	res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
+        res.header('Access-Control-Allow-Headers', "*");
         res.status(201).json(user);
       } catch (err) {
         console.log(err);
